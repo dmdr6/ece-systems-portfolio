@@ -23,3 +23,10 @@ $$e^{-At}\dot{x}(t) - e^{-At}Ax(t) = 0$$
 
 ---
 ### Step 2: Reverse Product Rule Application
+Evaluate the time derivative of the matrix exponential term:
+$$\frac{d}{dt}\left( e^{-At}x(t) \right) = e^{-At}\frac{dx(t)}{dt} + \left(\frac{d}{dt} e^{-At}\right)x(t) = e^{-At}\dot{x}(t) - e^{-At}Ax(t)$$
+
+Substituting this back into the rearranged differential equation simplifies the expression to:
+$$\frac{d}{dt}\left( e^{-At}x(t) \right) = 0$$
+
+---
