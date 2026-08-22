@@ -30,3 +30,8 @@ Substituting this back into the rearranged differential equation simplifies the 
 $$\frac{d}{dt}\left( e^{-At}x(t) \right) = 0$$
 
 ---
+
+### Step 3: Definite Integration Over Time
+Integrate both sides over the temporal interval $\tau \in [0, t]$:
+$$\int_{0}^{t} \frac{d}{d\tau}\left( e^{-A\tau}x(\tau) \ right) d\tau = \int_{0}^{t} 0 \, d\tau$$
+
