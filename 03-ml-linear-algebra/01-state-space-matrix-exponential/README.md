@@ -41,3 +41,11 @@ Apply the Fundamental Theorem of Calculus:
 $$\left[ e^{-A\tau}x(\tau) \right]_{\tau=0}^{\tau=t} = 0$$
 
 $$e^{-At}x(t) - e^{-A(0)}x(0) = 0$$
+
+Since $e^{-A(0)} = e^{\mathbf{0}} = I$ (where $I$ is the $n \times n$ identity matrix):
+
+$$e^{-At}x(t) - I x_0 = 0 \implies e^{-At}x(t) = x_0$$
+
+---
+### Step 4: Isolating the State Vector $x(t)$
+
