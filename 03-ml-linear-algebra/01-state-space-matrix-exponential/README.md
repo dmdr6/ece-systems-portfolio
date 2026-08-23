@@ -35,3 +35,9 @@ $$\frac{d}{dt}\left( e^{-At}x(t) \right) = 0$$
 Integrate both sides over the temporal interval $\tau \in [0, t]$:
 
 $$\int_{0}^{t} \frac{d}{d\tau}\left( e^{-A\tau}x(\tau) \right) d\tau = \int_{0}^{t} 0 \, d\tau$$
+
+Apply the Fundamental Theorem of Calculus:
+
+$$\left[ e^{-A\tau}x(\tau) \right]_{\tau=0}^{\tau=t} = 0$$
+
+$$e^{-At}x(t) - e^{-A(0)}x(0) = 0$$
