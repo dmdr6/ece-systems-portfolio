@@ -19,12 +19,28 @@ def main():
     t_span = (t_start, t_end)
     t_eval = p.linspace(t_start, t_end, 100)
 
-    # -----------------------------------------------------------------
-    # PART 1: Analytical Closed-Form Solution via Matrix Exponential
+    # ===============================================================
+    # 1. Analytical Closed-Form Solution via Matrix Exponential
     # x(t) = e^(At) * x0
-    # -----------------------------------------------------------------
+    # ===============================================================
     x_analytical = np.zeros((len(t_eval), len(x0)))
 
     for i, t in enumerate(t_eval):
         e_At = expm(A * t)
         x_analytical[i] = e_At @ x0
+
+    # ===============================================================
+    # 2. Numerical Integration via scipy.integrate.solve_ivp
+    # Solves dx/dt = Ax(t) step-by-step
+    # ===============================================================
+    sol = solve_ivp(
+        fun=system_dynamics,
+        t_span=t_span,
+        y0=x0,
+        t_eval=t_eval,
+        args=(A,),
+        method='RK45',
+        rtol=1e-8,
+        atol=1e-10
+    )
+    x_numerical = sol.y.T    # Shape: (N_samples, N_states)
