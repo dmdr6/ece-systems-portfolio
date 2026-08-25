@@ -51,3 +51,5 @@ $$e^{-At}x(t) - I x_0 = 0 \implies e^{-At}x(t) = x_0$$
 Pre-multiply both sides by the matrix inverse $(e^{-At})^{-1} = e^{At}$:
 
 $$e^{At} \left ( e^{-At}x(t) \right) = e^{At} x_0$$
+
+$$\left( e^{At} e^{-At} \right) x(t) = e^{At} x_0$$
