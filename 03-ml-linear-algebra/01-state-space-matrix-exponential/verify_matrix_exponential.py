@@ -44,3 +44,18 @@ def main():
         atol=1e-10
     )
     x_numerical = sol.y.T    # Shape: (N_samples, N_states)
+
+    # ===============================================================
+    # 3. Automated Proof Verification (Assertion Check)
+    # ===============================================================
+    # Compare position and velocity across all time steps
+    max_error = np.max(np.abs(x_analytical - x_numerical))
+
+    print("=" * 65)
+    print("STATE-SPACE MATRIX EXPONENTIAL PROOF VERIFICATION")
+    print("=" * 65)
+    print(f"Initial State x0:            Position = {x0[0]} m, Velocity = {x0[1]} m/s")
+    print(f"Simulation Window:           t = {t_start}s to t = {t_end}s")
+    print(f"Maximum Absolute Error:      {max_error:.2e}")
+
+    # Assert equivalence within numerical precision
