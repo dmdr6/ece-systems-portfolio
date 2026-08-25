@@ -59,3 +59,11 @@ def main():
     print(f"Maximum Absolute Error:      {max_error:.2e}")
 
     # Assert equivalence within numerical precision
+    np.testing.assert_allclose(x_analytical, x_numerical, rtol=1e-5, atol=1e-8)
+
+    print("-" * 65)
+    print("SUCCESS: Analytical x(t) = e^(At)*x0 matches numerical ODE solver!")
+    print("-" * 65)
+
+if __name__ == "__main__":
+    main()
