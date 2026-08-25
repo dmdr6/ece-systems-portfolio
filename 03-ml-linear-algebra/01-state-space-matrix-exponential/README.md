@@ -48,4 +48,6 @@ $$e^{-At}x(t) - I x_0 = 0 \implies e^{-At}x(t) = x_0$$
 
 ---
 ### Step 4: Isolating the State Vector $x(t)$
+Pre-multiply both sides by the matrix inverse $(e^{-At})^{-1} = e^{At}$:
 
+$$e^{At} \left ( e^{-At}x(t) \right) = e^{At} x_0$$
