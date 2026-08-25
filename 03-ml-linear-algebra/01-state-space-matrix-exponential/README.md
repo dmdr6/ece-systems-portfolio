@@ -53,3 +53,7 @@ Pre-multiply both sides by the matrix inverse $(e^{-At})^{-1} = e^{At}$:
 $$e^{At} \left ( e^{-At}x(t) \right) = e^{At} x_0$$
 
 $$\left( e^{At} e^{-At} \right) x(t) = e^{At} x_0$$
+
+$$I \cdot x(t) = e^{At} x_0$$
+
+$$x(t) = e^{At{x_0 \quad \blacksquare$$
