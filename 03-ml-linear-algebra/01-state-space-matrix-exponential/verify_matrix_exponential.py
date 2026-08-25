@@ -17,7 +17,7 @@ def main():
     t_start = 0.0
     t_end = 10.0
     t_span = (t_start, t_end)
-    t_eval = p.linspace(t_start, t_end, 100)
+    t_eval = np.linspace(t_start, t_end, 100)
 
     # ===============================================================
     # 1. Analytical Closed-Form Solution via Matrix Exponential
