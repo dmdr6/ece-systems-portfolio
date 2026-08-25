@@ -56,4 +56,4 @@ $$\left( e^{At} e^{-At} \right) x(t) = e^{At} x_0$$
 
 $$I \cdot x(t) = e^{At} x_0$$
 
-$$x(t) = e^{At{x_0 \quad \blacksquare$$
+$$x(t) = e^{At}x_0 \quad \blacksquare$$
