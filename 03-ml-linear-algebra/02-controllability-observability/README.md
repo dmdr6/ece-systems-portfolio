@@ -30,3 +30,6 @@ x_f - e^{A t_f} x_0 = \int_{0}^{t_f} e^{A(t_f - \tau)} B u(\tau) \, d\tau
 $$
 
 ---
+
+### Application of Cayley-Hamilton Theorem
+By the **Cayley-Hamilton Theorem**, every matrix $A \in \mathbb{R}^{n \times n}$ satisfies its own characteristic polynomial $p(\lambda) = \det(\lambda I - A) = 0$
