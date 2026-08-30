@@ -48,19 +48,26 @@ void loop() {
     sensors_event_t a, g, temp;
     mpu.getEvent(&a, &g, &temp);
 
+    // ==========================================
     // 1. Calculate 3D Vector Magnitude (m/s^2)
+    // ==========================================
+    
     float rawMag = sqrt(a.acceleration.x * a.acceleration.x +
                         a.acceleration.y * a.acceleration.y +
                         a.acceleration.z * a.acceleration.z);
-
+    
+    // =========================
     // 2. Moving Average Filter
+    // =========================
     totalSum -= readings[readIndex];
     readings[readIndex] = rawMag;
     totalSum += readings[readIndex];
     readIndex = (readIndex + 1) % FILTER_SIZE;
     float filteredMag = totalSum / FILTER_SIZE;
 
+    // ==============================================
     // 3. Step Detection Logic (sampled every 20ms)
+    // ==============================================
     unsigned long currentTime = millis();
     if (filteredMag > STEP_THRESHOLD_MS2 && (currentTime - lastStepTime > STEP_COOLDOWN_MS)) {
         stepCount++;
@@ -70,7 +77,9 @@ void loop() {
         Serial.println(stepCount);
     }
 
+    // =========================================================
     // 4. Slow down output printing (prints once every 250 ms)
+    // =========================================================    
     static unsigned long lastPrintTime = 0;
     if (currentTime - lastPrintTime >= 250) {
         lastPrintTime = currentTime;
