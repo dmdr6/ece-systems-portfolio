@@ -61,3 +61,33 @@ $$
 x_f - e^{A t_f} x_0 = \sum_{i=0}^{n-1} A^i B \left( \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau \right)
 $$
 
+Define the vector coefficients $v_i \in \mathbb{R}^m$ as:
+
+$$
+v_i = \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau
+$$
+
+The integral equation simplifies to a linear combination of matrix columns:
+
+$$
+x_f - e^{A t_f} x_0 = B v_0 + AB v_1 + A^2B v_2 + \dots + A^{n-1}B v_{n-1}
+$$
+
+Expressing this linear combination in block matrix form yields:
+
+$$
+x_f - e^{A t_f} x_0 = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \begin{bmatrix} v_0 \\ v_1 \\ v_2 \\ \vdots \\ v_{n-1} \end{bmatrix} = \mathcal{C} \, \mathbf{v}
+$$
+
+### Conclusion
+For any arbitrary state destination $x_f \in \mathbb{R}^n$, the linear system $\mathcal{C} \mathbf{v} = d$ must have a valid solution. This requires the **Controllability Matrix** $\mathcal{C}$ to span the entire state space $\mathbb{R}^n$:
+
+$$
+\mathcal{C} = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \in \mathbb{R}^{n \times nm}
+$$
+
+$$
+\text{rank}(\mathcal{C}) = n
+$$
+
+---
