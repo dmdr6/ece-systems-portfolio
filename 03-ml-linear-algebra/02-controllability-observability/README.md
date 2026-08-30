@@ -1,93 +1,106 @@
-# Proof 2: Controllability & Observability Rank Conditions
+# Controllability & Observability Rank Conditions Derivation
 
-## Overview
-This module derives and validates the algebraic conditions for controllability and observability in continuous Linear Time-Invariant (LTI) systems defined by:
+## Problem Statement
 
-$$
-\dot{x}(t) = Ax(t) + Bu(t), \quad x(t) \in \mathbb{R}^n, \, u(t) \in \mathbb{R}^m
-$$
-$$
-y(t) = Cx(t) + Du(t), \quad y(t) \in \mathbb{R}^p
-$$
+Given a continuous linear time-invariant (LTI) system governed by the state-space dynamic equations:
 
----
+$$\dot{x}(t) = Ax(t) + Bu(t), \quad x(t) \in \mathbb{R}^n, \, u(t) \in \mathbb{R}^m$$
+$$y(t) = Cx(t) + Du(t), \quad y(t) \in \mathbb{R}^p$$
 
-## Part 1: Controllability Rank Condition
+Where $A \in \mathbb{R}^{n \times n}$, $B \in \mathbb{R}^{n \times m}$, $C \in \mathbb{R}^{p \times n}$, and $D \in \mathbb{R}^{p \times m}$. Prove that the algebraic rank conditions $\text{rank}(\mathcal{C}) = n$ and $\text{rank}(\mathcal{O}) = n$ are necessary and sufficient for full controllability and observability, where:
 
-### Definition & State Trajectory
-A system is **controllable** if there exists an unconstrained control input $u(t)$ that transfers any initial state $x(0) = x_0$ to any final state $x(t_f) = x_f$ in finite time $t_f > 0$.
-
-The analytical solution to the state-space dynamic equation is given by:
-
-$$
-x(t_f) = e^{A t_f} x_0 + \int_{0}^{t_f} e^{A(t_f - \tau)} B u(\tau) \, d\tau
-$$
-
-Rearranging terms yields the reachable state vector:
-
-$$
-x_f - e^{A t_f} x_0 = \int_{0}^{t_f} e^{A(t_f - \tau)} B u(\tau) \, d\tau
-$$
+$$\mathcal{C} = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \in \mathbb{R}^{n \times nm}$$
+$$\mathcal{O} = \begin{bmatrix} C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1} \end{bmatrix} \in \mathbb{R}^{np \times n}$$
 
 ---
 
-### Application of Cayley-Hamilton Theorem
-By the **Cayley-Hamilton Theorem**, every matrix $A \in \mathbb{R}^{n \times n}$ satisfies its own characteristic polynomial $p(\lambda) = \det(\lambda I - A) = 0$. Consequently, high-order matrix powers $A^k$ for $k \ge n$ can be expressed as a finite linear combination of lower powers $\{I, A, A^2, \dots, A^{n-1}\}$:
+## Part I: Controllability Rank Condition Derivation
 
-$$
-A^k = \sum_ {i=0}^{n-1} \alpha_i(k) A^i
-$$
+### Step 1: Solution to the Non-Homogeneous State Equation
+The closed-form trajectory solution for the continuous LTI system evaluated at time $t_f > 0$ is given by:
 
-Using the Taylor series expansion of the matrix exponential $e^{A(t_f - \tau)}$, we apply Cayley-Hamilton to collapse the infinite series into a finite sum:
+$$x(t_f) = e^{A t_f} x(0) + \int_{0}^{t_f} e^{A(t_f - \tau)} B u(\tau) \, d\tau$$
 
-$$
-e^{A(t_f - \tau)} = \sum_{k=0}^{\infty} \frac{(t_f - \tau)^k}{k!} A^k = \sum_{i=0}^{n-1} \psi_i(\tau) A^i
-$$
+Rearrange the expression to isolate the contribution of the control input $u(\tau)$ on the target state displacement:
 
-where $\psi_i(\tau)$ are continuous scalar functions.
+$$x(t_f) - e^{A t_f} x(0) = \int_{0}^{t_f} e^{A(t_f - \tau)} B u(\tau) \, d\tau$$
 
 ---
 
-### Algebraic Matrix Construction
-Substituting $e^{A(t_f - \tau)}$ back into the convolution integral:
+### Step 2: Cayley-Hamilton Theorem Expansion
+By the Cayley-Hamilton Theorem, every square matrix $A \in \mathbb{R}^{n \times n}$ satisfies its own characteristic polynomial $p(\lambda) = \det(\lambda I - A) = 0$. Consequently, high-order matrix powers $A^k$ for $k \ge n$ can be expressed as a finite linear combination of matrix powers of degree less than $n$:
 
-$$
-x_f - e^{A t_f} x_0 = \int_{0}^{t_f} \left( \sum_{i=0}^{n-1} \psi_i(\tau) A^i \right) B u(\tau) \, d\tau
-$$
+$$A^k = \sum_{i=0}^{n-1} \alpha_i(k) A^i$$
 
-Factoring the constant matrix products $A^i B$ out of the integration:
+Applying this property to the infinite matrix exponential power series yields:
 
-$$
-x_f - e^{A t_f} x_0 = \sum_{i=0}^{n-1} A^i B \left( \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau \right)
-$$
+$$e^{A(t_f - \tau)} = \sum_{k=0}^{\infty} \frac{(t_f - \tau)^k}{k!} A^k = \sum_{i=0}^{n-1} \psi_i(\tau) A^i$$
 
-Define the vector coefficients $v_i \in \mathbb{R}^m$ as:
-
-$$
-v_i = \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau
-$$
-
-The integral equation simplifies to a linear combination of matrix columns:
-
-$$
-x_f - e^{A t_f} x_0 = B v_0 + AB v_1 + A^2B v_2 + \dots + A^{n-1}B v_{n-1}
-$$
-
-Expressing this linear combination in block matrix form yields:
-
-$$
-x_f - e^{A t_f} x_0 = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \begin{bmatrix} v_0 \\ v_1 \\ v_2 \\ \vdots \\ v_{n-1} \end{bmatrix} = \mathcal{C} \, \mathbf{v}
-$$
-
-### Conclusion
-For any arbitrary state destination $x_f \in \mathbb{R}^n$, the linear system $\mathcal{C} \mathbf{v} = d$ must have a valid solution. This requires the **Controllability Matrix** $\mathcal{C}$ to span the entire state space $\mathbb{R}^n$:
-
-$$
-\mathcal{C} = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \in \mathbb{R}^{n \times nm}
-$$
-
-$$
-\text{rank}(\mathcal{C}) = n
-$$
+Where $\psi_i(\tau)$ are continuous scalar functions of time.
 
 ---
+
+### Step 3: Integral Factorization & Matrix Block Construction
+Substitute the finite series expansion of $e^{A(t_f - \tau)}$ back into the state displacement equation:
+
+$$x(t_f) - e^{A t_f} x(0) = \int_{0}^{t_f} \left( \sum_{i=0}^{n-1} \psi_i(\tau) A^i \right) B u(\tau) \, d\tau$$
+
+Factor out the constant matrix terms $A^i B$ from the scalar integral:
+
+$$x(t_f) - e^{A t_f} x(0) = \sum_{i=0}^{n-1} A^i B \left( \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau \right)$$
+
+Define the vector integral coefficients $v_i \in \mathbb{R}^m$ as:
+
+$$v_i = \int_{0}^{t_f} \psi_i(\tau) u(\tau) \, d\tau$$
+
+Rewrite the finite sum as a block matrix multiplication:
+
+$$x(t_f) - e^{A t_f} x(0) = B v_0 + AB v_1 + A^2 B v_2 + \dots + A^{n-1}B v_{n-1}$$
+
+$$x(t_f) - e^{A t_f} x(0) = \begin{bmatrix} B & AB & A^2B & \dots & A^{n-1}B \end{bmatrix} \begin{bmatrix} v_0 \\ v_1 \\ v_2 \\ \vdots \\ v_{n-1} \end{bmatrix} = \mathcal{C} \, \mathbf{v}$$
+
+To steer $x(0)$ to any arbitrary target state $x(t_f) \in \mathbb{R}^n$, the linear system $\mathcal{C} \mathbf{v} = d$ must yield a valid vector $\mathbf{v}$ for any $d \in \mathbb{R}^n$. This holds if and only if:
+
+$$\text{rank}(\mathcal{C}) = n \quad \blacksquare$$
+
+---
+
+## Part II: Observability Rank Condition Derivation
+
+### Step 1: Zero-Input Output Response
+Without loss of generality, evaluate the zero-input system dynamic response ($u(t) = 0$) to isolate the effect of initial state $x(0) = x_0$ on the output vector $y(t)$:
+
+$$y(t) = C e^{At} x_0$$
+
+---
+
+### Step 2: Cayley-Hamilton Expansion of Output Trajectory
+Apply the Cayley-Hamilton reduction to the matrix exponential term $e^{At}$:
+
+$$e^{At} = \sum_{i=0}^{n-1} \phi_i(t) A^i$$
+
+Substitute this expansion directly into the output equation:
+
+$$y(t) = C \left( \sum_{i=0}^{n-1} \phi_i(t) A^i \right) x_0 = \sum_{i=0}^{n-1} \phi_i(t) C A^i x_0$$
+
+---
+
+### Step 3: Successive Output Derivatives at $t = 0$
+Evaluate successive temporal derivatives of the output vector $y(t)$ at the initial instant $t = 0$:
+
+$$y(0) = C x_0$$
+$$\dot{y}(0) = CA x_0$$
+$$\ddot{y}(0) = CA^2 x_0$$
+$$\vdots$$
+$$y^{(n-1)}(0) = CA^{n-1} x_0$$
+
+---
+
+### Step 4: System Stacking & Full-Rank Mapping
+Stack the $n-1$ derivatives into a single extended vector equation:
+
+$$\begin{bmatrix} y(0) \\ \dot{y}(0) \\ \ddot{y}(0) \\ \vdots \\ y^{(n-1)}(0) \end{bmatrix} = \begin{bmatrix} C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1} \end{bmatrix} x_0 \implies Y_{0:n-1} = \mathcal{O} \, x_0$$
+
+To uniquely solve for the initial state vector $x_0 \in \mathbb{R}^n$ given output measurement history, the linear transformation $\mathcal{O}$ must have a trivial nullspace ($\ker(\mathcal{O}) = \{0\}$). This holds if and only if $\mathcal{O}$ has full column rank:
+
+$$\text{rank}(\mathcal{O}) = n \quad \blacksquare$$
