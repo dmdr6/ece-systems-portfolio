@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# --- Task 1:  Generate a Simulated Sensor ---
+
 # 1. Define true sensor parameters and configuration
 TRUE_A = 0.05        # Sensor sensitivity (V/°C)
 TRUE_B = 0.50        # Sensor offset (V)
