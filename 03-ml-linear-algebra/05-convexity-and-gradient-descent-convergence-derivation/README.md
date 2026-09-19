@@ -39,3 +39,25 @@ $$(dx)^T Q x = \left( (dx)^T Q x \right)^T = x^T Q^T dx = x^T Q dx$$
 Thus, combining the linear differential terms:
 
 $$\frac{1}{2} \left( x^T Q dx + x^T Q dx \right) = x^T Q dx$$
+
+### Step 2: Total First Differential
+Collecting the first-order terms in $dx$:
+
+$$df = f(x + dx) - f(x) = x^T Q dx + b^T dx + \mathcal{O}(\|dx\|^2)$$
+
+$$df = (Q x + b)^T dx$$
+
+By the definition of the gradient $\nabla f(x)$, where $df = \langle \nabla f(x), dx \rangle = (\nabla f(x))^T dx$:
+
+$$\nabla f(x) = Q x + b$$
+
+### Step 3: Hessian Matrix Derivation
+The Hessian matrix $\nabla^2 f(x) \in \mathbb{R}^{n \times n}$ is defined as the Jacobian matrix of the gradient operator:
+
+$$\nabla^2 f(x) = \frac{\partial}{\partial x} \left( \nabla f(x) \right) = \frac{\partial}{\partial x} (Q x + b)$$
+
+Since $Q$ is constant with respect to $x$ and $b$ is independent of $x$:
+
+$$\nabla^2 f(x) = Q$$
+
+---
