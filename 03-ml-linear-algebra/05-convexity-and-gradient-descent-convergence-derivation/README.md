@@ -120,3 +120,13 @@ $$\rho(I - \alpha Q) = \max_i |1 - \alpha \lambda_i(Q)| < 1$$
 
 For all eigenvalues $\lambda_i(Q) \in [\lambda_{\min}(Q), \lambda_{\max}(Q)]$:
 
+$$-1 < 1 - \alpha \lambda_i(Q) < 1$$
+
+1. **Lower Bound:** $1 - \alpha \lambda_i(Q) < 1 \implies \alpha \lambda_i(Q) > 0 \implies \alpha > 0$ (assuming $Q \succ 0$).
+2. **Upper Bound:** $1 - \alpha \lambda_i(Q) > -1 \implies \alpha \lambda_i(Q) < 2 \implies \alpha < \frac{2}{\lambda_i(Q)}$.
+
+To guarantee convergence across all eigen-directions simultaneously, the step size must satisfy the bound dictated by the maximum eigenvalue $\lambda_{\max}(Q)$:
+
+$$0 < \alpha < \frac{2}{\lambda_{\max}(Q)}$$
+
+*   **Optimal Step Size:** $\alpha_{\text{opt}} = \frac{2}{\lambda_{\min}(Q) + \lambda_{\max}(Q)}$ yields the fastest linear rate of convergence.
