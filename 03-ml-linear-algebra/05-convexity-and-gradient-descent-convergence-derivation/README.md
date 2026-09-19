@@ -76,13 +76,13 @@ $$v^T Q v \ge 0 \quad \forall v \in \mathbb{R}^n$$
 If $Q \succ 0$ (all eigenvalues $\lambda_i(Q) > 0$), $f(x)$ is **strictly convex**.
 
 ### Step 2: Global Minimum Condition
-By first-order optimality conditions, $x^{*}$ is a stationary point if and only if the gradient vanishes:
+By first-order optimality conditions, $x^\star$ is a stationary point if and only if the gradient vanishes:
 
-$$\nabla f(x^{*}) = 0 \implies Q x^{*} + b = 0 \implies Q x^{*} = -b$$
+$$\nabla f(x^\star) = 0 \implies Q x^\star + b = 0 \implies Q x^\star = -b$$
 
 If $Q \succ 0$, $Q$ is invertible, guaranteeing a unique global minimum:
 
-$$x^{*} = -Q^{-1} b$$
+$$x^\star = -Q^{-1} b$$
 
 ---
 
@@ -98,14 +98,14 @@ Substituting the analytical gradient $\nabla f(x_k) = Q x_k + b$:
 $$x_{k+1} = x_k - \alpha (Q x_k + b)$$
 
 ### Step 2: Error Dynamics
-Define the parameter error vector at iteration $k$ as $e_k = x_k - x^{*}$. Since $Q x^{*} = -b$, we rewrite $b = -Q x^{*}$:
+Define the parameter error vector at iteration $k$ as $e_k = x_k - x^\star$. Since $Q x^\star = -b$, we rewrite $b = -Q x^\star$:
 
 $$x_{k+1} = x_k - \alpha Q x_k - \alpha b$$
-$$x_{k+1} = x_k - \alpha Q x_k + \alpha Q x^{*}$$
+$$x_{k+1} = x_k - \alpha Q x_k + \alpha Q x^\star$$
 
-Subtracting $x^{*}$ from both sides:
+Subtracting $x^\star$ from both sides:
 
-$$x_{k+1} - x^{*} = (x_k - x^{*}) - \alpha Q (x_k - x^{*})$$
+$$x_{k+1} - x^\star = (x_k - x^\star) - \alpha Q (x_k - x^\star)$$
 
 $$e_{k+1} = (I - \alpha Q) e_k$$
 
