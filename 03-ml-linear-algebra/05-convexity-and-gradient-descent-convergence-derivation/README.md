@@ -92,3 +92,31 @@ $$x^* = -Q^{-1} b$$
 The standard Gradient Descent (GD) iteration scheme with constant learning rate $\alpha > 0$ is defined as:
 
 $$x_{k+1} = x_k - \alpha \nabla f(x_k)$$
+
+Substituting the analytical gradient $\nabla f(x_k) = Q x_k + b$:
+
+$$x_{k+1} = x_k - \alpha (Q x_k + b)$$
+
+### Step 2: Error Dynamics
+Define the parameter error vector at iteration $k$ as $e_k = x_k - x^*$. Since $Q x^* = -b$, we rewrite $b = -Q x^*$:
+
+$$x_{k+1} = x_k - \alpha Q x_k - \alpha b$$
+$$x_{k+1} = x_k - \alpha Q x_k + \alpha Q x^*$$
+
+Subtracting $x^*$ from both sides:
+
+$$x_{k+1} - x^* = (x_k - x^*) - \alpha Q (x_k - x^*)$$
+
+$$e_{k+1} = (I - \alpha Q) e_k$$
+
+By induction, the error after $k$ steps is given by matrix power iteration:
+
+$$e_k = (I - \alpha Q)^k e_0$$
+
+### Step 3: Spectral Step-Size Bound for Convergence
+For the error to vanish as $k \to \infty$ ($e_k \to 0$), the iteration matrix $T = I - \alpha Q$ must be a contraction mapping. This requires its spectral radius $\rho(T)$ to be strictly less than $1$:
+
+$$\rho(I - \alpha Q) = \max_i |1 - \alpha \lambda_i(Q)| < 1$$
+
+For all eigenvalues $\lambda_i(Q) \in [\lambda_{\min}(Q), \lambda_{\max}(Q)]$:
+
