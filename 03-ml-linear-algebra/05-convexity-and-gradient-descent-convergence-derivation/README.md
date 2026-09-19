@@ -61,3 +61,34 @@ Since $Q$ is constant with respect to $x$ and $b$ is independent of $x$:
 $$\nabla^2 f(x) = Q$$
 
 ---
+
+## Part II: Convexity Proof & Global Optimality
+
+### Step 1: Second-Order Characterization of Convexity
+A twice-continuously differentiable function $f: \mathbb{R}^n \to \mathbb{R}$ is convex if and only if its Hessian is positive semi-definite everywhere:
+
+$$\nabla^2 f(x) \succeq 0 \quad \forall x \in \mathbb{R}^n$$
+
+Since $\nabla^2 f(x) = Q$ is constant across $\mathbb{R}^n$, $f(x)$ is convex if and only if:
+
+$$v^T Q v \ge 0 \quad \forall v \in \mathbb{R}^n$$
+
+If $Q \succ 0$ (all eigenvalues $\lambda_i(Q) > 0$), $f(x)$ is **strictly convex**.
+
+### Step 2: Global Minimum Condition
+By first-order optimality conditions, $x^*$ is a stationary point if and only if the gradient vanishes:
+
+$$\nabla f(x^*) = 0 \implies Q x^* + b = 0 \implies Q x^* = -b$$
+
+If $Q \succ 0$, $Q$ is invertible, guaranteeing a unique global minimum:
+
+$$x^* = -Q^{-1} b$$
+
+---
+
+## Part III: Gradient Descent Formulation & Convergence Analysis
+
+### Step 1: First-Order Update Rule
+The standard Gradient Descent (GD) iteration scheme with constant learning rate $\alpha > 0$ is defined as:
+
+$$x_{k+1} = x_k - \alpha \nabla f(x_k)$$
